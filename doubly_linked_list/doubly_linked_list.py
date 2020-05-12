@@ -62,11 +62,11 @@ class DoublyLinkedList:
     current head's next node the new head of the List.
     Returns the value of the removed Node."""
     def remove_from_head(self):
-        if self.head: #check for head node
+        if self.head:
             value = self.head.value #keep value for current head to return
             self.delete(self.head)# remove the value at the head 
             # update self.head 
-            self.head = self.head.next
+            self.next= self.head
             return value #return old head val
       
 
@@ -74,7 +74,15 @@ class DoublyLinkedList:
     as the new tail of the list. Don't forget to handle 
     the old tail node's next pointer accordingly."""
     def add_to_tail(self, value):
-        pass
+        new_node = ListNode(value) #wrap value in Listnode
+        self.length +=1  #add to list length
+        if not self.tail and not self.head: #check if not tail, if not add neew as tail
+            self.tail = new_node
+            self.head=new_node #may be empty need to set head as well adding first node to ll
+        else: # if is, change pointers on old tail and set new
+            new_node.prev = self.tail #new node prev is old tail
+            self.tail.next = new_node  #make old tail point backwards to new node as prev node
+            self.tail = new_node #change old head to be new 
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
