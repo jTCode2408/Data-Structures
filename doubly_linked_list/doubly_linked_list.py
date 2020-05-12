@@ -50,8 +50,9 @@ class DoublyLinkedList:
     def add_to_head(self, value):
         new_node = ListNode(value) #wrap value in Listnode
         self.length +=1  #add to list length
-        if not self.head: #check if not head, if not add neew as head
+        if not self.head and not self.tail: #check if not head, if not add neew as head
             self.head = new_node
+            self.tail=new_node #may be empty need to set tail as well adding first node to ll
         else: # if is, change pointers on old head and set new
             new_node.next = self.head #new node next is old head
             self.head.prev = new_node  #make old head point backwards to new node as prev node
