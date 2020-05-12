@@ -22,11 +22,16 @@ class Stack:
         return self.size
     def push(self, value):
         #return self.storage.append(value) 
-        self.storage.add_to_end(value)
-        self.size +=1
+        self.storage.add_to_end(value) ##from ll functions add to end of stack. LIFO
+        self.size +=1 #size of in +1
     def pop(self):
         #if len(self.storage) == 0:
             #return None
         #else:
             #return self.storage.pop() 
-        pass
+        if not self.storage.head:
+            return None
+        else:
+            self.size -=1 #remove 1 from in
+            return self.storage.remove_at_end() #rmeove last input from end of stack. LIFO
+            
