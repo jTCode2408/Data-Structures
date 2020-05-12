@@ -25,5 +25,6 @@ class Queue:
         self.storage.append(value)
 
     def dequeue(self):
-        self.storage.pop(0)
+        if len(self.storage) != 0:
+            return self.storage.pop(0)
 
