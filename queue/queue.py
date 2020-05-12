@@ -27,11 +27,16 @@ class Queue:
 
     def enqueue(self, value):
         #self.storage.append(value)
-        self.storage.remove_from_head(value)
+        self.storage.add_to_end(value) #adds to back of que
         self.size +=1
+        
 
     def dequeue(self):
         #if len(self.storage) != 0:
             #return self.storage.pop(0)
-            pass
+            if not self.storage.head:
+                return None
+            else:
+                self.size -=1
+                return self.storage.remove_from_head() #takes from front of que
 
