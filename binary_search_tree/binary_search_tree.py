@@ -17,12 +17,45 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+         #start at root, check if something there, if not insert
+         #if something at root, move dwon & compare val: IF MORE-GO RIGHT: IF LESS: GO LEFT
+         #repeat until empty found then return valu
+        if self.value is None:
+            self.value.insert(value)
+        if value < self.value:
+            if self.left is None:
+                self.left = BSTNode(value)
+            else:
+                self.left.insert(value)
+        else:
+            if self.right is None:
+                self.right =BSTNode(value)
+            else:
+                self.right.insert(value)
+        
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        #when we start searching, self will be root(only 1 we have access to rn)
+        #compare target against self
+        #if target matches self.value: return True
+        #if false: we need to go left or right to check, BUT nothing is left or right
+        if target == self.value:
+            return True #this is where we stop. 
+            ##with recursion we need stopping point. then it will bubble back up the tree with correct value to where function was initially called
+            #if target < self.value: go left
+        if target < self.value:
+            if not self.left: #if there is no node left to go to, its false, else continue to call contain function
+                return False
+            return self.left.contains(target) #call contains function in itself(recursion) with same target to repeat operation of comparison on the left/right
+        #if target is greater than self.value:go right
+        else:
+            
+            if not self.right:
+                return False 
+            return self.right.contains(target) #self.right and self.left are there own nodes, which mean they each have contain method on them to be able to run check operations onn each tree level until target is found a mtach, then true is returned
+        
 
     # Return the maximum value found in the tree
     def get_max(self):
