@@ -80,6 +80,16 @@ class BSTNode:
     #if node, call fn on it
     #?need to return value?
     #repeat right
+        
+        if self.value is None:
+            return None
+        if self.value is not None:
+            fn(self.value)
+        if self.left is not None:
+            self.left.for_each(fn)
+        if self.right is not None:
+            self.right.for_each(fn)
+
 
     # Part 2 -----------------------
 
