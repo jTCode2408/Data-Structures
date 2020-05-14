@@ -1,3 +1,4 @@
+from collections import deque
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -11,7 +12,7 @@ This part of the project comprises two days:
 """
 
 
-from collections import deque
+
 
 class BSTNode:
     def __init__(self, value):
@@ -101,11 +102,11 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        if self.left is not None:
-            self.left.in_order_print(self.left)
-        print(node.value)
-        if self.right is not None:
-            self.right.in_order_print(self.right)
+        if self.left:
+            self.left.in_order_print(self.left) #go through everything on left side(less than side), if is left, then print vlue
+        print(self.value)
+        if self.right:
+            self.right.in_order_print(self.right) #repeat process for all on  greater than side
 
             
 
@@ -114,13 +115,13 @@ class BSTNode:
     # in an iterative breadth first traversal
     def bft_print(self, node):
         queue = deque()
-        queue.append(node)
+        queue.append(self)
         while len(queue) > 0:
-            current = queue.pop()
+            current = queue.popleft()
             print(current.value)
-            if current.left is not None:
+            if current.left:
                 queue.append(current.left)
-            if current.right is not None:
+            if current.right:
                 queue.append(current.right)
 
        
@@ -128,16 +129,16 @@ class BSTNode:
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        stack = []
-        stack.append(node)
+        stack = [] #empty stack to keep track of nodes visite
+        stack.append(node) #add first node
 
-        while len(stack) >0:
-            current = stack.pop()
-            print(current.value)
-            if current.right is not None:
+        while len(stack) >0: #as long as there is something in stack
+            current = stack.pop() #take current element, remove from stack
+            print(current.value) #print value
+            if current.right is not None: #if something on right, add right children to stack
                 stack.append(current.right)
             if current.left is not None:
-                stack.append(current.left)
+                stack.append(current.left) #if something right, add right 
             
 
     # Stretch Goals -------------------------
