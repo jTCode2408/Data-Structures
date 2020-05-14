@@ -9,6 +9,10 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+
+
+from collections import deque
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -89,24 +93,52 @@ class BSTNode:
             self.left.for_each(fn)
         if self.right is not None:
             self.right.for_each(fn)
-
-
     # Part 2 -----------------------
-
+##DFS- uses stack (our own or call stack w recursion) LIFO
+#--uses: backtracking, complete search, paths, goes deep.
+##BFS - uses queue FIFO
+#--uses: check If path exists between nodes, findings distance out or 'levels' away. goes wide
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
-    #def in_order_print(self, node):
-        pass
+    def in_order_print(self, node):
+        if self.left is not None:
+            self.left.in_order_print(self.left)
+        print(node.value)
+        if self.right is not None:
+            self.right.in_order_print(self.right)
+
+            
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        queue = deque()
+        queue.append(node)
+        while len(queue) > 0:
+            current = queue.pop()
+            print(current.value)
+            if current.left is not None:
+                queue.append(current.left)
+            if current.right is not None:
+                queue.append(current.right)
+
+       
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        stack = []
+        stack.append(node)
+
+        while len(stack) >0:
+            current = stack.pop()
+            print(current.value)
+            if current.right is not None:
+                stack.append(current.right)
+            if current.left is not None:
+                stack.append(current.left)
+            
 
     # Stretch Goals -------------------------
     # Note: Research may be required
